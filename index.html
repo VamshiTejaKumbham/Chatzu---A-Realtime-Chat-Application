@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Socket.IO chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.39.0/css-doodle.min.js"></script>
+    
+
+    <link rel="stylesheet" href="./index.css">
+
+  </head>
+  <body>
+
+    <css-doodle click-to-update>
+      <style>
+          
+        :doodle{
+          @grid: 1 / 100vw 100vh / #0a0c27;
+        background-size: 200px 200px;
+        background-image: @doodle(
+          @grid: 6 / 100%;
+          @size: 4px;
+          font-size: 4px;
+          color: hsl(@r240,27%, 50%);
+          box-shadow: @m3x5(
+            calc(4em - @nx * 1em) calc(@ny * 1em)
+              @p(@m3(currentColor), @m2(transparent)),
+            calc(2em + @nx * 1em) calc(@ny * 1em)
+              @lp
+          );
+        );
+      }
+  
+
+      </style>
+    </css-doodle>
+
+    <ul id="messages"></ul>
+    <form id="form" action="">
+      <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      let counter = 0;
+  
+      const socket = io({
+        ackTimeout: 10000,
+        retries: 0,
+        auth: {
+          serverOffset: 0
+        }
+      });
+  
+      const form = document.getElementById('form');
+      const input = document.getElementById('input');
+      const messages = document.getElementById('messages');
+  
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (input.value) {
+          const clientOffset = `${socket.id}`;
+          socket.emit('chat message', input.value, clientOffset);
+          input.value = '';
+        }
+      });
+
+    
+  
+      socket.on('chat message', (msg, serverOffset) => {
+        const item = document.createElement('li');
+        item.textContent = msg;
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+        socket.auth.serverOffset = serverOffset;
+      });
+    
+ 
+    </script>
+  </body>
+</html>
