@@ -1,86 +1,130 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Socket.IO chat</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- For Fonts and Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playball&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.39.0/css-doodle.min.js"></script>
+    <link rel="stylesheet" href="./login.css">
+    <title>Welcome, Chatsu-san!</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.39.0/css-doodle.min.js"></script>
     
-
-    <link rel="stylesheet" href="./index.css">
-
-  </head>
-  <body>
-
+</head>
+<body>
     <css-doodle click-to-update>
-      <style>
-          
-        :doodle{
-          @grid: 1 / 100vw 100vh / #0a0c27;
-        background-size: 200px 200px;
-        background-image: @doodle(
-          @grid: 6 / 100%;
-          @size: 4px;
-          font-size: 4px;
-          color: hsl(@r240,27%, 50%);
-          box-shadow: @m3x5(
-            calc(4em - @nx * 1em) calc(@ny * 1em)
-              @p(@m3(currentColor), @m2(transparent)),
-            calc(2em + @nx * 1em) calc(@ny * 1em)
-              @lp
+        <style>
+            
+          :doodle{
+            @grid: 1 / 100vw 100vh / #0a0c27;
+          background-size: 200px 200px;
+          background-image: @doodle(
+            @grid: 6 / 100%;
+            @size: 4px;
+            font-size: 4px;
+            color: hsl(0, 0%, 100%);
+            box-shadow: @m3x5(
+              calc(4em - @nx * 1em) calc(@ny * 1em)
+                @p(@m3(currentColor), @m2(transparent)),
+              calc(2em + @nx * 1em) calc(@ny * 1em)
+                @lp
+            );
           );
-        );
-      }
-  
-
-      </style>
-    </css-doodle>
-
-    <ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
-    </form>
-
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      let counter = 0;
-  
-      const socket = io({
-        ackTimeout: 10000,
-        retries: 0,
-        auth: {
-          serverOffset: 0
         }
-      });
-  
-      const form = document.getElementById('form');
-      const input = document.getElementById('input');
-      const messages = document.getElementById('messages');
-  
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        if (input.value) {
-          const clientOffset = `${socket.id}`;
-          socket.emit('chat message', input.value, clientOffset);
-          input.value = '';
-        }
-      });
+    
+
+        </style>
+      </css-doodle>  
 
     
-  
-      socket.on('chat message', (msg, serverOffset) => {
-        const item = document.createElement('li');
-        item.textContent = msg;
-        messages.appendChild(item);
-        window.scrollTo(0, document.body.scrollHeight);
-        socket.auth.serverOffset = serverOffset;
-      });
-    
- 
-    </script>
-  </body>
+    <div class="containerA">
+        <div class="container1" >
+            <p id="chatsu">Chat-zu!<br></p>
+            <div class="chatbox">
+                <span id="txt1">Hi...</span>
+                <span id="txt2">Hello!</span>
+                <span id="txt1">This app is Amazing!</span>
+                <span id="txt2">Yeah!</span>
+                <span id="txt1">Is it safe here to chat?</span>
+                <span id="txt2">It's safe and secure.</span>
+                <span id="txt1">Cool!</span>
+                </div>
+        </div>
+        <div class="container2">
+            <h2 style="text-shadow: 1px 1px 2px slategray;">Welcome back!</h2>
+            <p>Already a <i>Chat-su member?</i></p>
+            <form action="" id="loginForm">
+                <input type="text" name="Username" id="username" placeholder="Username"><br>
+                <input type="password" name="password" id="password" placeholder="Password">
+                <br>
+                <button class="loginbtn">Login</button>
+            </form>
+            <div id="error" style="color: red;"></div>
+            <br>
+            <a href="">Forgot password?</a>
+            <hr>
+            <p>Don't have an account? <a href="">Sign-up</a></p>
+        </div>
+    </div>
+
+   <script>
+       const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const errorDiv = document.getElementById('error');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            validateLogin();
+        });
+
+        function validateLogin() {
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+            
+      
+
+        fetch('userdetails.json') 
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch JSON data');
+                    }
+                    return response.json();
+                })
+                .then(users => {
+                const user = users.find(user => user.name === username && user.password === password);
+                if (user) {
+                    window.location.href = `home.html?username=${encodeURIComponent(username)}`;
+                } else {
+                    errorDiv.textContent = "Incorrect username or password";
+                }
+            })
+                .catch(error => {
+                    
+                    errorDiv.textContent = error.message;
+                });
+              }
+
+        //       window.onload = function() {
+        //     const username = sessionStorage.getItem('username');
+        //     if (username) {
+        //         const container21 = document.querySelector('.container-2-1');
+        //         if (container21) {
+        //             container21.innerHTML += `<p>Welcome, ${username}!</p>`;
+        //         }
+        //     }
+        // };
+              
+</script>
+</body>
 </html>
