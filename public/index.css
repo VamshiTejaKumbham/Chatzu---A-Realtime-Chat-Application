@@ -1,0 +1,126 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: "Jost", sans-serif;
+    font-size: large
+
+}
+.title{
+    display: block;
+    margin: auto;
+    align-content: center;
+}
+
+#chatsu{
+    font-size: 7vw;
+    font-weight: bold;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    display: block;
+    margin: auto;
+    
+}
+
+#txt1{
+    float: left;
+    clear: both;
+    border: 3px solid wheat;
+    padding: 5px;
+}
+#txt2{
+    float: right;
+    clear: both;
+    border: 3px solid rgba(10,12,39,255);
+    padding: 5px;
+
+}
+.chatbox{
+    width: 80%;
+    height: 70%;
+    display: block;
+    margin: auto;
+    padding: 5%;
+}
+.containerA{
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 80vw; 
+    height: 80vh;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 5px 15px 0px;
+    box-sizing: border-box;
+    padding: 1vw;  
+    background-color: white;  
+}
+
+.container1{
+    width: 50%;
+    height: 100%;
+    border-top-left-radius: 1vw;
+    border-bottom-left-radius: 1vw;
+    border-right: 0;
+}
+
+.container2{
+    width: 50%;
+    height: 100%;
+
+    align-content: center;
+    padding-left: 10vw;
+
+    border-top-right-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+    
+
+
+
+}
+.container2 input{
+    border:0;
+    border-bottom: 0.05vw solid gray;
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    text-align: center;
+    width: 22vw;
+    height: 100%;
+}
+.container2 input:hover{
+    background-color: rgb(215, 215, 215);
+    border-radius: 120px;
+}
+.container2 input:focus{
+    outline: none;
+}
+.container2 hr{
+    width: 24vw;
+}
+/* #loginForm{
+    display: flex;
+    flex-direction: column;
+} */
+
+.loginbtn{
+    width: 23vw;
+    border-radius: 125px;
+    margin-top: 15px;
+    height: 40px;
+}
+
+.loginbtn:hover{
+   background-color: rgba(10,12,39,255);
+   border: 2px solid rgba(10,12,39,255);
+   transition: 0.4s;
+   color: white;
+}
+.loginbtn:active{
+  transform: translate(0%, 3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+
+
+}
+
+
