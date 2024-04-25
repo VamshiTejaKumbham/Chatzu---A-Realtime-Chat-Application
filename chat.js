@@ -3,6 +3,7 @@ const { createServer } = require('http');
 const { join } = require('path'); 
 const { Server } = require('socket.io');
 const { MongoClient } = require('mongodb'); 
+const path = require('path');
 
 async function main() {
   const client = new MongoClient('mongodb://localhost:27017'); 
@@ -47,6 +48,8 @@ async function main() {
       }
     }
   });
+
+  app.use(express.static(path.resolve(__dirname, 'public')));
 
   server.listen(3000, () => {
     console.log('server running at http://localhost:3000');
