@@ -3,7 +3,8 @@ body {
     padding-bottom: 3rem; 
     font-family: 'Jost', sans-serif;
     overflow-y: hidden;
-    position: relative;
+    background-image: url('./Images/image.png'); 
+    
   }
 
   #form { 
@@ -72,24 +73,31 @@ body {
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     max-width: 50%;
-    max-height: 70%;
+    max-height: 80%;
+    /* height: 50vh; */
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     overflow-y: auto;
     /* opacity: 1; */
     backdrop-filter: blur(2px);
   }
 
-  .css-doodle {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0; 
-    
-}
-#UserName{
+ 
 
+
+#welcomeMessage{
+  padding-left: 10px;
+  padding-top: 5px;
+  top:0;
+  display: block;
+  margin: auto;
+  width: 52.1vw;
+  height: 9vh;
   color: white;
+  background-color: #333;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  font-size: 2vw;
 }

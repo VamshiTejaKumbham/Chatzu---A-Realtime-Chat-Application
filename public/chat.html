@@ -15,34 +15,14 @@
   </head>
   <body>
 
-    <css-doodle click-to-update>
-      <style>
-          
-        :doodle{
-          @grid: 1 / 100vw 100vh / #0a0c27;
-        background-size: 200px 200px;
-        background-image: @doodle(
-          @grid: 6 / 100%;
-          @size: 4px;
-          font-size: 4px;
-          color: hsl(@r240,27%, 50%);
-          box-shadow: @m3x5(
-            calc(4em - @nx * 1em) calc(@ny * 1em)
-              @p(@m3(currentColor), @m2(transparent)),
-            calc(2em + @nx * 1em) calc(@ny * 1em)
-              @lp
-          );
-        );
-      }
-  
-
-      </style>
-    </css-doodle>
-
-    <!-- <p id="welcomeMessage"></p> -->
-    <div class="box">
-    <ul id="messages"></ul>
-    </div>
+    
+    
+      <p id="welcomeMessage"></p>
+      <div class="box">
+      <ul id="messages"></ul>
+      </div>
+    
+    
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
     </form>
@@ -72,7 +52,6 @@
         }
       });
 
-    
   
       socket.on('chat message', (msg, serverOffset) => {
         const item = document.createElement('li');
@@ -93,8 +72,8 @@
             }
             var username = getUrlParameter('username');            
             if (username) {
-              var pTag = document.getElementById('welcomeMessage'); // Get the <p> tag by its ID
-        pTag.textContent = username + "!";
+              var pTag = document.getElementById('welcomeMessage'); 
+                  pTag.textContent = username.toUpperCase();
             }
       };
     </script>
